@@ -53,22 +53,27 @@ public erlang(double erlang, double bloking, double lineas, double porcent){
 	for (int i = 1; i <= linea; i++) {
             pn = computeRecursive(i, erlang, pn);
 	}
+        System.out.println("ErlangB: "+pn);
 	return pn;
 	}
 
     protected static final double computeRecursive(double linea, double erlang,
 	double pn_1) {
-	return (erlang * pn_1) / (linea + erlang * pn_1);
+        double a = (erlang * pn_1) / (linea + erlang * pn_1);
+	System.out.println("Recursive: "+a);
+        return a;
     }
     
 public double ErlangBResult(){
     int j = 0;
     BigDecimal bd = new BigDecimal(erlangB(j, getErlang())).setScale(3, RoundingMode.HALF_UP);
     double bloqueo = bd.doubleValue();
-    while(!(Double.compare(getBloking(), bloqueo) == 0)){
+    System.out.println("Bloqueo: "+bloqueo);
+    while(!(Double.compare(getBloking(), bloqueo) <= 0)){
         j++;
         bd = new BigDecimal(erlangB(j, getErlang())).setScale(3, RoundingMode.HALF_UP);
         bloqueo = bd.doubleValue();
+        System.out.println("Bloqueo: "+bloqueo);
     }
     return j;
 }    
